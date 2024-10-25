@@ -17,12 +17,7 @@ namespace JIRA_PMS_ConsoleAPP
     {
 
         private string email = "irfan007lohar@gmail.com";
-        private string apiToken = "ATATT3xFfGF0JuYg-gd-D5xdPCEU1s-LmaOuR0HNAVJkp_5RmOHu06QjtKR9BfMZkwac6Nz2fHobhKdO_CYa2JkA2fW5SIbXLpI8MExswwfGvcS52iXGLwqDGH6oXqI3FYIjbQc9-teEtdIcG4pH-JZv3KgAOWzE-cOH8kucnQycBYct9FzSC6c=4DFF70DF";
-
-        public Class1()
-        {
-
-        }
+        private string apiToken = "ATATT3xFfGF0NqdtoTKrOzAHZjoiTghbPladtPomaqpzSt45je5dZTiFeLYVCK5XK7eqQNfob4JKb40jd5aK47_vh0kxg3MFIn9a1NMwQZsTm4W72Rm_JB4duQ2HoO7yrrp1Dd1QpIRTiiCCpTDbwpdR8kRfWx6uMpmez5mXRG0qHQTyfKWnCvY=C0645BA2";
 
         public void GETData()
         {
@@ -46,11 +41,9 @@ namespace JIRA_PMS_ConsoleAPP
                 sr.Close();
 
             }
-
-
         }
 
-        public async Task<string> MakeGitLabAPIRequest(string API_URL, HttpContent? requestBody)
+        public async Task<string> GetResponse(string API_URL, HttpContent? requestBody)
         {
             using var client = new HttpClient();
 

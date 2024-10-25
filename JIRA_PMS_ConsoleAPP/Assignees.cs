@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace JIRA_PMS_ConsoleAPP
 {
-    public class Assignees
+    public class Assignee
     {
-        public int? AccountId { get; set; } 
+        public string? AccountId { get; set; } 
         public string? DisplayName { get; set; } 
         public string? EmailAddress { get; set; }    
     }

@@ -3,9 +3,9 @@ using System;
 
 using System.Collections.Generic;
 
-public class Project 
+public class ProjectJSON
 {
-    public RequiredProjectJSON project;
+    public RequiredProjectJSON project { get; set; }
 }
 
 public class RequiredProjectJSON
@@ -18,9 +18,9 @@ public class RequiredProjectJSON
 
     public string? description { get; set; } 
 
-    public DateTime? startDate { get; set; } 
+    public string? startDate { get; set; } 
 
-    public DateTime? endDate { get; set; } 
+    public string? endDate { get; set; } 
 
     public string? status { get; set; } 
 
@@ -28,13 +28,12 @@ public class RequiredProjectJSON
 
     public Owner? owner { get; set; } 
 
-    public List<string>? tags { get; set; } 
 
-    //public Dictionary<string, string>? customFields { get; set; } 
+    public Dictionary<string, string>? customFields { get; set; } = [];
 
     public List<Task1>? tasks { get; set; }
 
-    //public List<Resource>? resources { get; set; } 
+    public List<Resource>? resources { get; set; }
 
 }
 
@@ -53,7 +52,6 @@ public class Owner
 public class Task1
 
 {
-    //public static System.Threading.Tasks.Task CompletedTask { get; internal set; }
     public string? id { get; set; } // Task unique identifier
 
     public string? title { get; set; } // Task title
@@ -64,21 +62,19 @@ public class Task1
 
     public string? status { get; set; } // Task status (e.g., open, in progress, completed)
 
-    public List<Assignee>? assignees { get; set; } // List of assigned users
+    public List<Assignee1>? assignees { get; set; } // List of assigned users
 
     public Reporter? reporter { get; set; } // Task reporter
 
     public string? priority { get; set; } // Task priority (e.g., high, medium, low)
 
-    public DateTime? startDate { get; set; } // Task start date
+    public string? startDate { get; set; } // Task start date
 
-    public DateTime? dueDate { get; set; } // Task due date
+    public string? dueDate { get; set; } // Task due date
 
-    //public string? timeEstimate { get; set; } // Estimated time
+    public string? timeEstimate { get; set; } // Estimated time
 
-    //public string? timeSpent { get; set; } // Time spent on the task
-
-    //public string? resolution { get; set; } // Resolution of the task
+    public string? resolution { get; set; } // Resolution of the task
 
     public List<SubTask1>? subtasks { get; set; } // Nested subtasks
 
@@ -86,13 +82,13 @@ public class Task1
 
     public List<Attachment1>? attachments { get; set; } // Attachments linked to the task
 
-    //public List<Timelog>? timelogs { get; set; } // Timelogs for the task
+    public Timelog? timelogs { get; set; } // Timelogs for the task
 
-    //public Dictionary<string, string>? customFields { get; set; } // Custom fields for task-specific data
-
+    public Dictionary<string, string>? customFields { get; set; } = [];// Custom fields for task-specific data
+    public List<string>? tags { get; set; }
 }
 
-public class Assignee
+public class Assignee1
 
 {
 
@@ -125,8 +121,6 @@ public class SubTask1
     public string? title { get; set; }
 
     public string? status { get; set; }
-
-    public List<Assignee>? assignees { get; set; }
 
 }
 
@@ -168,7 +162,7 @@ public class Attachment1
 
     public double? fileSize { get; set; } // Size of the file in KB
 
-    public DateTime? uploadDate { get; set; } // When the file was uploaded
+    public string? uploadDate { get; set; } // When the file was uploaded
 
     public string? url { get; set; } // Download or view URL
 
@@ -178,13 +172,13 @@ public class Timelog
 
 {
 
-    public string? id { get; set; }
+    //public string? id { get; set; }
 
-    public User? user { get; set; }
+    //public User? user { get; set; }
 
     public string? timeSpent { get; set; } // Time logged for the task (in hours)
 
-    public DateTime? dateLogged { get; set; } // Date when the time was logged
+    //public DateTime? dateLogged { get; set; } // Date when the time was logged
 
 }
 

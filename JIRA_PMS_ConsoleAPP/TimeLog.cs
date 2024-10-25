@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace JIRA_PMS_ConsoleAPP
 {
-    public class Resolution1
+    class TimeLog
     {
-        public string? Description { get; set; } = "N/A";
+        public string? TimeSpent { get; set; }   
     }
 }
