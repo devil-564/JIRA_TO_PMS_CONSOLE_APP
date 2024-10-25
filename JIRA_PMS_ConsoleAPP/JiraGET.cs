@@ -15,9 +15,8 @@ namespace JIRA_PMS_ConsoleAPP
     public class Class1
        
     {
-
-        private string email = "irfan007lohar@gmail.com";
-        private string apiToken = "ATATT3xFfGF0NqdtoTKrOzAHZjoiTghbPladtPomaqpzSt45je5dZTiFeLYVCK5XK7eqQNfob4JKb40jd5aK47_vh0kxg3MFIn9a1NMwQZsTm4W72Rm_JB4duQ2HoO7yrrp1Dd1QpIRTiiCCpTDbwpdR8kRfWx6uMpmez5mXRG0qHQTyfKWnCvY=C0645BA2";
+        private readonly string email = "irfan007lohar@gmail.com";
+        private readonly string apiToken = "ATATT3xFfGF0NqdtoTKrOzAHZjoiTghbPladtPomaqpzSt45je5dZTiFeLYVCK5XK7eqQNfob4JKb40jd5aK47_vh0kxg3MFIn9a1NMwQZsTm4W72Rm_JB4duQ2HoO7yrrp1Dd1QpIRTiiCCpTDbwpdR8kRfWx6uMpmez5mXRG0qHQTyfKWnCvY=C0645BA2";
 
         public void GETData()
         {

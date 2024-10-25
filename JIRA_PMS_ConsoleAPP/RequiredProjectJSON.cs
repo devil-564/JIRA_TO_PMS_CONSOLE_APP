@@ -41,11 +41,11 @@ public class Owner
 
 {
 
-    public string? id { get; set; } // Owner ID
+    public string? id { get; set; } 
 
-    public string? name { get; set; } // Owner's name
+    public string? name { get; set; } 
 
-    public string? email { get; set; } // Owner's email
+    public string? email { get; set; } 
 
 }
 
@@ -176,9 +176,9 @@ public class Timelog
 
     //public User? user { get; set; }
 
-    public string? timeSpent { get; set; } // Time logged for the task (in hours)
+    public string? timeSpent { get; set; }
 
-    //public DateTime? dateLogged { get; set; } // Date when the time was logged
+    //public DateTime? dateLogged { get; set; }
 
 }
 
