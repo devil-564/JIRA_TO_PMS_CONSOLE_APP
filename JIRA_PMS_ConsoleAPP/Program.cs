@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 internal class Program
 {
+
     static public string GiveCorrectDateFormat(string date)
     {
         if (date != null)
@@ -23,8 +24,6 @@ internal class Program
     {
         int help = Convert.ToInt32(time);
 
-        Console.WriteLine(help);
-
         help = help / 3600;
 
         string correctedTime = help.ToString();
@@ -34,8 +33,10 @@ internal class Program
     }
     public static async Task Main(string[] args)
     {
+        
+
         Class1 obj = new Class1();
-        int BoardId = 0;
+        int BoardId;
         bool BoardIdConfirmation = false;
         bool ProcessIsSprint = false;
 
@@ -116,15 +117,15 @@ internal class Program
                     id = issue.Fields.Project?.Id.ToString() ?? "N/A",
                     name = issue.Fields.Project?.Name ?? "N/A",
                     description = issue.Fields.Project?.Description ?? "N/A",
-                    startDate = GiveCorrectDateFormat(issue.Fields.Created),
-                    endDate = GiveCorrectDateFormat(issue.Fields.DueDate),
+                    startDate = GiveCorrectDateFormat(issue.Fields.Created) ?? "N/A",
+                    endDate = GiveCorrectDateFormat(issue.Fields.DueDate) ?? "N/A",
                     status = issue.Fields.Status?.Name ?? "N/A",
                     priority = issue.Fields.Priority?.Name ?? "N/A",
                     owner = new()
                     {
-                        id = issue.Fields.Creator?.AccountId?.ToString(),
-                        name = issue.Fields.Creator?.DisplayName,
-                        email = issue.Fields.Creator?.EmailAddress,
+                        id = issue.Fields.Creator?.AccountId?.ToString() ?? "N/A",
+                        name = issue.Fields.Creator?.DisplayName ?? "N/A",
+                        email = issue.Fields.Creator?.EmailAddress ?? "N/A",
                     },
                     tasks = new List<Task1>(),
                     resources = [],
@@ -137,19 +138,19 @@ internal class Program
             {
                 Task1 task = new Task1()
                 {
-                    id = issue.Id.ToString(),
-                    title = issue.Key,
-                    description = issue.Fields.Description,
-                    type = issue.Fields.IssueType?.Name,
-                    status = issue.Fields.Status?.Name,
+                    id = issue.Id.ToString() ?? "N/A",
+                    title = issue.Key ?? "N/A",
+                    description = issue.Fields.Description ?? "N/A",
+                    type = issue.Fields.IssueType?.Name ?? "N/A",
+                    status = issue.Fields.Status?.Name ?? "N/A",
                     assignees = new List<Assignee1>(),
                     reporter = new()
                     {
-                        id = issue.Fields.Reporter?.AccountId.ToString(),
-                        name = issue.Fields.Reporter?.DisplayName,
-                        email = issue.Fields.Reporter?.EmailAddress,
+                        id = issue.Fields.Reporter?.AccountId.ToString() ?? "N/A",
+                        name = issue.Fields.Reporter?.DisplayName ?? "N/A",
+                        email = issue.Fields.Reporter?.EmailAddress ?? "N/A",
                     },
-                    priority = issue.Fields.Priority?.Name,
+                    priority = issue.Fields.Priority?.Name ?? "N/A",
                     startDate = GiveCorrectDateFormat(issue.Fields.CustomField_10015),
                     dueDate = GiveCorrectDateFormat(issue.Fields.DueDate),
                     subtasks = new List<SubTask1>(),
@@ -157,8 +158,14 @@ internal class Program
                     attachments = new List<Attachment1>(),
                     resolution = "N/A",
                     timeEstimate = GiveCorrectTimeEstimate(issue.Fields.TimeEstimate) ?? "N/A",
-                    timelogs = issue.Fields.TimeTracking,
-                    tags = issue.Fields.Labels,
+                    tags = issue.Fields.Labels ?? [],
+                    timelogs = new()
+                    {
+                       id = "N/A",
+                       user = {},
+                       timeSpent = issue.Fields.TimeEstimate ?? "N/A",
+                       dateLogged = "N/A"
+                    }
                 };
 
                 // For Sub Task
@@ -170,22 +177,21 @@ internal class Program
                     {
                         SubTask1 stask = new SubTask1()
                         {
-                            id = subtask.Id.ToString(),
-                            title = subtask.Key,
-                            status = subtask.Fields.Status?.Name
+                            id = subtask.Id.ToString() ?? "N/A",
+                            title = subtask.Key ?? "N/A",
+                            status = subtask.Fields.Status?.Name ?? "N/A"
                         };
                         task.subtasks.Add(stask);
                     }
-
                 }
 
                 if (issue.Fields.Assignee != null)
                 {
                     Assignee1 assignee = new Assignee1()
                     {
-                        id = issue.Fields.Assignee.AccountId,
-                        name = issue.Fields.Assignee.DisplayName,
-                        email = issue.Fields.Assignee.EmailAddress
+                        id = issue.Fields.Assignee.AccountId ?? "N/A",
+                        name = issue.Fields.Assignee.DisplayName ?? "N/A",
+                        email = issue.Fields.Assignee.EmailAddress ?? "N/A"
                     };
                     task.assignees.Add(assignee);
                 }
@@ -195,14 +201,14 @@ internal class Program
                 {
                     Comment1 comment1 = new Comment1()
                     {
-                        id = comment.id.ToString(),
-                        text = comment.Body,
+                        id = comment.id.ToString() ?? "N/A",
+                        text = comment.Body ?? "N/A",
                         timestamp = comment.Created,
                         author = new()
                         {
-                            id = comment.Author.AccountId?.ToString(),
-                            name = comment.Author.DisplayName,
-                            email = comment.Author.EmailAddress
+                            id = comment.Author.AccountId?.ToString() ?? "N/A",
+                            name = comment.Author.DisplayName ?? "N/A",
+                            email = comment.Author.EmailAddress ?? "N/A"
                         }
                     };
 
@@ -213,19 +219,21 @@ internal class Program
                 {
                     Attachment1 attachment1 = new Attachment1()
                     {
-                        id = attachment.Id.ToString(),
-                        fileName = attachment.FileName,
-                        fileType = attachment.MimeType,
+                        id = attachment.Id.ToString() ?? "N/A",
+                        fileName = attachment.FileName ?? "N/A",
+                        fileType = attachment.MimeType ?? "N/A",
                         fileSize = (attachment.Size / 1024),
-                        uploadDate = GiveCorrectDateFormat(attachment.Created.ToString()),
-                        url = $"https://irfan007lohar.atlassian.net/rest/api/3/attachment/content/{attachment.Id}"
+                        uploadDate = GiveCorrectDateFormat(attachment.Created.ToString()) ?? "N/A",
+                        url = $"https://irfan007lohar.atlassian.net/rest/api/3/attachment/content/{attachment.Id}" ?? "N/A"
                     };
 
                     task.attachments.Add(attachment1);
                 }
 
+
                 ReqPJSON.tasks?.Add(task);
             }
+
             projects.Add(ReqPJSON);
             project.project = ReqPJSON;
         }

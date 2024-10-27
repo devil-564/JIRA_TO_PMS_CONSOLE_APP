@@ -172,13 +172,13 @@ public class Timelog
 
 {
 
-    //public string? id { get; set; }
+    public string? id { get; set; }
 
-    //public User? user { get; set; }
+    public User? user { get; set; }
 
     public string? timeSpent { get; set; }
 
-    //public DateTime? dateLogged { get; set; }
+    public string? dateLogged { get; set; }
 
 }
 
