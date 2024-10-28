@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace JIRA_PMS_ConsoleAPP
+﻿namespace JIRA_PMS_ConsoleAPP
 {
     public class Location
     {
