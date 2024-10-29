@@ -16,7 +16,6 @@ internal class Program
             str += email[i];
         }
 
-        Console.WriteLine(str);
         return str;
     }
     static public string GiveCorrectDateFormat(string date)
