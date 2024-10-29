@@ -7,7 +7,18 @@ using System.Threading.Tasks;
 
 internal class Program
 {
+    static public string EmailWithoutTailFunc(string email)
+    {
+        string str = "";
 
+        for(int i = 0; i < email.Length-10; i++)
+        {
+            str += email[i];
+        }
+
+        Console.WriteLine(str);
+        return str;
+    }
     static public string GiveCorrectDateFormat(string date)
     {
         if (date != null)
@@ -41,6 +52,8 @@ internal class Program
 
         string EmailId = Console.ReadLine();
 
+        string EmailWithoutTail = EmailWithoutTailFunc(EmailId);
+
         Console.WriteLine("Enter your JIRA Cloud Access Token");
 
         string ApiToken = Console.ReadLine();
@@ -63,7 +76,7 @@ internal class Program
         {
             try
             {
-                var responseAllBoard = await obj.GetResponse("https://irfan007lohar.atlassian.net/rest/agile/1.0/board/", null);
+                var responseAllBoard = await obj.GetResponse($"https://{EmailWithoutTail}.atlassian.net/rest/agile/1.0/board/", null);
                 JiraBoardResponse Board = JsonConvert.DeserializeObject<JiraBoardResponse>(responseAllBoard);
 
                 Console.WriteLine("\n-> List of Boards present in your JIRA Account\n");
@@ -110,11 +123,9 @@ internal class Program
 
             // Below Code Meaning - Now untill now user have inputted the board id and now from here i have first fetched the API which provide me list of issues available inside the board and then by deserializing it to an object I'll do the mapping to PMS JSON Schema Class which helps in Data Migration.
 
-            var responseAllIssues = await obj.GetResponse($"https://irfan007lohar.atlassian.net/rest/agile/1.0/board/{BoardId}/issue", null);
+            var responseAllIssues = await obj.GetResponse($"https://{EmailWithoutTail}.atlassian.net/rest/agile/1.0/board/{BoardId}/issue", null);
 
             JiraTask jiraTask = JsonConvert.DeserializeObject<JiraTask>(responseAllIssues);
-
-            //var jiraTaskJson = System.Text.Json.JsonSerializer.Serialize(jiraTask, options);
 
             List<RequiredProjectJSON> projects = new List<RequiredProjectJSON>();
 
@@ -238,7 +249,7 @@ internal class Program
                             fileType = attachment.MimeType ?? "N/A",
                             fileSize = (attachment.Size / 1024),
                             uploadDate = GiveCorrectDateFormat(attachment.Created.ToString()) ?? "N/A",
-                            url = $"https://irfan007lohar.atlassian.net/rest/api/3/attachment/content/{attachment.Id}" ?? "N/A"
+                            url = $"https://{EmailWithoutTail}.atlassian.net/rest/api/3/attachment/content/{attachment.Id}" ?? "N/A"
                         };
 
                         task.attachments.Add(attachment1);
