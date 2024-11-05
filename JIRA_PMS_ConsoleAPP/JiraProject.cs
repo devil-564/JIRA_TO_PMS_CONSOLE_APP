@@ -1,7 +1,7 @@
 ﻿public class Lead
 {
     public string DisplayName { get; set; }
-    public bool Active { get; set; }  // Updated to 'bool' since the JSON shows 'active' is a boolean
+    public bool Active { get; set; }
 }
 
 public class JiraProject

@@ -47,7 +47,7 @@ internal class Program
 
         Console.WriteLine("-> User Authentication \n");
 
-        Console.WriteLine("Enter your JIRA Cloud UserName");
+        Console.WriteLine("Enter your JIRA Cloud Email Id");
 
         string EmailId = Console.ReadLine();
 
@@ -58,7 +58,7 @@ internal class Program
         string ApiToken = Console.ReadLine();
 
 
-        Class1 obj = new Class1(EmailId, ApiToken);
+        FetchAPI obj = new FetchAPI(EmailId, ApiToken);
 
         int BoardId;
         bool BoardIdConfirmation = false;
@@ -69,13 +69,14 @@ internal class Program
             WriteIndented = true,
         };
 
-        //Below Code Meaning - Basic Console App Interface for User Experience which provide basic information related to boards and project and user needs to select any one board or project from the available list using it's board id and program will return all the issues or task which are associated with that particular project.
-
+        // Below Code Meaning - Basic Console App Interface for User Experience which provide basic information related to boards and project, user needs to select any one board or project from the available list using it's board id and program will return all the issues or task which are associated with that particular project.
+       
         while (true)
         {
             try
             {
-                var responseAllBoard = await obj.GetResponse($"https://{EmailWithoutTail}.atlassian.net/rest/agile/1.0/board/", null);
+                var responseAllBoard = await obj.GetResponse($"https://{EmailWithoutTail}.atlassian.net/rest/agile/1.0/board/");
+
                 JiraBoardResponse Board = JsonConvert.DeserializeObject<JiraBoardResponse>(responseAllBoard);
 
                 Console.WriteLine("\n-> List of Boards present in your JIRA Account\n");
@@ -122,12 +123,11 @@ internal class Program
 
             // Below Code Meaning - Now untill now user have inputted the board id and now from here i have first fetched the API which provide me list of issues available inside the board and then by deserializing it to an object I'll do the mapping to PMS JSON Schema Class which helps in Data Migration.
 
-            var responseAllIssues = await obj.GetResponse($"https://{EmailWithoutTail}.atlassian.net/rest/agile/1.0/board/{BoardId}/issue", null);
+            var responseAllIssues = await obj.GetResponse($"https://{EmailWithoutTail}.atlassian.net/rest/agile/1.0/board/{BoardId}/issue");
 
             JiraTask jiraTask = JsonConvert.DeserializeObject<JiraTask>(responseAllIssues);
 
             List<RequiredProjectJSON> projects = new List<RequiredProjectJSON>();
-
             ProjectJSON project = new();
 
             try

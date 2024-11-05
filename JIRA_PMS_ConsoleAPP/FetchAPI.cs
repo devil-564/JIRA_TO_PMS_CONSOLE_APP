@@ -5,20 +5,21 @@ namespace JIRA_PMS_ConsoleAPP
 {
     using System;
     using System.Net.Http.Headers;
+    using System.Runtime.InteropServices.Marshalling;
 
-    public class Class1
+    public class FetchAPI
        
     {
         private readonly string email;
         private readonly string apiToken;
 
-        public Class1(string email, string apiToken)
+        public FetchAPI(string email, string apiToken)
         {
             this.email = email;
             this.apiToken = apiToken;
         }
 
-        public async Task<string> GetResponse(string API_URL, HttpContent? requestBody)
+        public async Task<string> GetResponse(string API_URL)
         {
             using var client = new HttpClient();
 
@@ -28,18 +29,12 @@ namespace JIRA_PMS_ConsoleAPP
 
             HttpResponseMessage response;
 
-            if (requestBody == null)
-            {
-                response = await client.GetAsync(API_URL);
-            }
-            else
-            {
-                response = await client.PostAsync(API_URL, requestBody);
-            }
+            response = await client.GetAsync(API_URL);
 
             response.EnsureSuccessStatusCode();
 
             string responseBody = await response.Content.ReadAsStringAsync();
+            var responseBodyContent =  response.Content.GetHashCode();
 
             return responseBody;
         }

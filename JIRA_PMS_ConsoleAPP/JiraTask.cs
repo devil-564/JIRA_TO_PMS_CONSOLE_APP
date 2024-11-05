@@ -1,30 +1,7 @@
 ﻿namespace JIRA_PMS_ConsoleAPP
 {
-    public class CommentAuthor
-    {
-        public string? AccountId { get; set; }
-        public string? EmailAddress { get; set; }
-        public string? DisplayName { get; set; }
-    }
-
-    public class CommentsJira
-    {
-        public int id { get; set; }
-        public string? Body { get; set; }
-        public DateTime? Created { get; set; }
-        public CommentAuthor Author { get; set; }
-    }
-    public class Comment
-    {
-        public List<CommentsJira> Comments { get; set; }
-
-    }
-
-
-
-    public class Field
-    {
-
+    public class Field {
+    
         public string? Description { get; set; }
         public Comment? Comment { get; set; }
         public List<SubTask>? SubTasks { get; set; }
@@ -52,8 +29,7 @@
 
         public string? TimeEstimate { get; set; }
     }
-
-
+    
     public class Issue
     {
         public int Id { get; set; }
